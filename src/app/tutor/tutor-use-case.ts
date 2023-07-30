@@ -55,4 +55,20 @@ export class TutorUseCase {
 
         await this.tutorRepo.updateTutor(tutor);
     }
+
+    async delete(id: number): Promise<void> {
+        const tutorExists = await this.tutorRepo.findTutorById(id);
+
+        if (tutorExists == null) {
+            throw new Error("Tutor does not exist");
+        }
+
+        const pets = await this.tutorRepo.getPetsOfTutor(id);
+
+        if (pets.length > 0) {
+            throw new Error("Cannot remove the tutor, he has registered pets");
+        }
+
+        await this.tutorRepo.deleteTutor(id);
+    }
 }

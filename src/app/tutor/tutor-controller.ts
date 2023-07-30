@@ -59,4 +59,18 @@ export class TutorController {
             });
         }
     }
+
+    async delete(request: Request, response: Response) {
+        try {
+            const { id } = request.params;
+
+            await this.useCase.delete(Number(id));
+
+            return response.status(200).send();
+        } catch (err: any) {
+            return response.status(400).json({
+                message: err.message || "Unexpected error",
+            });
+        }
+    }
 }

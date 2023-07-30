@@ -1,3 +1,4 @@
+import { Pet } from "../entities/pet/pet-entity";
 import PetModel from "../entities/pet/pet-model";
 import {
     CreateTutorResponse,
@@ -9,6 +10,17 @@ import TutorModel from "../entities/tutor/tutor-model";
 import { TutorRepository } from "../entities/tutor/tutor-repository";
 
 export class TutorMongoRepository implements TutorRepository {
+    async getPetsOfTutor(tutorId: number): Promise<Pet[]> {
+        const pets = await PetModel.find(
+            { tutor: tutorId },
+            { _id: 0, __v: 0, tutor: 0 },
+        );
+
+        return pets;
+    }
+    async deleteTutor(id: number): Promise<void> {
+        await TutorModel.where({ id }).deleteOne();
+    }
     async updateTutor(tutor: Tutor): Promise<void> {
         await TutorModel.where({ id: tutor.id }).updateOne(tutor);
     }
