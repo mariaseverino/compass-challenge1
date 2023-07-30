@@ -36,4 +36,23 @@ export class TutorUseCase {
 
         return response;
     }
+
+    async update(request: Tutor): Promise<void> {
+        const tutorExists = await this.tutorRepo.findTutorById(request.id);
+
+        if (!!tutorExists) {
+            throw new Error("Tutor not exists");
+        }
+
+        const tutor = new Tutor(
+            request.id,
+            request.name,
+            request.phone,
+            request.email,
+            request.date_of_birth,
+            request.zip_code,
+        );
+
+        await this.tutorRepo.updateTutor(tutor);
+    }
 }

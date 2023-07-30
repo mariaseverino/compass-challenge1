@@ -9,6 +9,9 @@ import TutorModel from "../entities/tutor/tutor-model";
 import { TutorRepository } from "../entities/tutor/tutor-repository";
 
 export class TutorMongoRepository implements TutorRepository {
+    async updateTutor(tutor: Tutor): Promise<void> {
+        await TutorModel.where({ id: tutor.id }).updateOne(tutor);
+    }
     async getAll(): Promise<GetTutorResponse> {
         const tutorsWithPets: GetTutorResponse = [];
         const tutors = await TutorModel.find({}, { _id: 0, __v: 0 });
