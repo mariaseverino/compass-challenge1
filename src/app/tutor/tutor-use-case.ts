@@ -1,4 +1,7 @@
-import { CreateTutorResponse } from "../../entities/tutor/tutor-dto";
+import {
+    CreateTutorResponse,
+    GetTutorResponse,
+} from "../../entities/tutor/tutor-dto";
 import { TutorRepository } from "../../entities/tutor/tutor-repository";
 import { Tutor } from "../../entities/tutor/tutor-entity";
 
@@ -24,6 +27,12 @@ export class TutorUseCase {
         );
 
         const response = await this.tutorRepo.create(tutor);
+
+        return response;
+    }
+
+    async list(): Promise<GetTutorResponse> {
+        const response = await this.tutorRepo.getAll();
 
         return response;
     }

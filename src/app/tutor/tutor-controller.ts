@@ -25,4 +25,16 @@ export class TutorController {
             });
         }
     }
+
+    async list(request: Request, response: Response) {
+        try {
+            const result = await this.useCase.list();
+
+            return response.status(200).json(result);
+        } catch (err: any) {
+            return response.status(400).json({
+                message: err.message || "Unexpected error",
+            });
+        }
+    }
 }
