@@ -4,7 +4,7 @@ import routes from "./routes";
 import swaggerUi from "swagger-ui-express";
 import docs from "./swagger.json";
 
-config();
+config({ path: process.env.NODE_ENV === "dev" ? ".env.dev" : ".env.test" });
 
 const app = express();
 
