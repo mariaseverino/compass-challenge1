@@ -1,0 +1,406 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Compass Challenge #01",
+        "description": "Challenge developed for the first challenge of Compass.",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/tutor": {
+            "post": {
+                "tags": ["Tutor"],
+                "summary": "Register a new tutor in the system",
+                "consumes": "application/json",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": { "$ref": "#/definitions/Tutor" }
+                    }
+                ],
+
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/definitions/successful"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/definitions/CleanerAlreadyExists"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tutors": {
+            "get": {
+                "tags": ["Tutor"],
+                "summary": "List all tutors",
+                "consumes": "application/json",
+                "produces": "application/json",
+
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/definitions/Tutors"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/definitions/InvalidToken"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tutor/:id": {
+            "put": {
+                "tags": ["Tutor"],
+                "summary": "Update information of some tutor",
+                "consumes": "application/json",
+                "produces": "application/json",
+
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": { "$ref": "#/definitions/Tutor" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/definitions/successful"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Tutor"],
+                "summary": "Delete some tutor",
+                "consumes": "application/json",
+                "produces": "application/json",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/definitions/successful"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/definitions/InvalidId"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+        "/pet/:tutorId": {
+            "post": {
+                "tags": ["Pet"],
+                "summary": "Register a new pet in the system",
+                "consumes": "application/json",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": { "$ref": "#/definitions/Pet" }
+                    }
+                ],
+
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/definitions/successful"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/definitions/CleanerAlreadyExists"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+        "/pet/:petId/tutor/:tutorId": {
+            "put": {
+                "tags": ["Pet"],
+                "summary": "Update information of some pet",
+                "consumes": "application/json",
+                "produces": "application/json",
+
+                "parameters": [
+                    {
+                        "name": "petId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tutorId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/definitions/successful"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Pet"],
+                "summary": "Delete some pet",
+                "consumes": "application/json",
+                "produces": "application/json",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/definitions/successful"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/definitions/InvalidId"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Tutor": {
+            "type": "object",
+            "properties": {
+                "id": { "type": "number", "example": 1 },
+                "name": { "type": "string", "example": "Jonas" },
+                "phone": { "type": "string", "example": "85989323895" },
+                "email": { "type": "string", "example": "jonas@paidepet2.com" },
+                "date_of_birth": {
+                    "type": "string",
+                    "example": "1993-12-12 10:10"
+                },
+                "zip_code": { "type": "string", "example": "61760000" }
+            }
+        },
+        "TutorWithPets": {
+            "type": "object",
+            "properties": {
+                "id": { "type": "number", "example": 1 },
+                "name": { "type": "string", "example": "Jonh Doe" },
+                "phone": { "type": "string", "example": "85989323895" },
+                "email": {
+                    "type": "string",
+                    "example": "jose.abreu@compasso.com"
+                },
+                "date_of_birth": {
+                    "type": "string",
+                    "example": "1993-12-12 10:10"
+                },
+                "zip_code": { "type": "string", "example": "61760000" },
+                "pets": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Pet"
+                    }
+                }
+            }
+        },
+        "Tutors": {
+            "type": "array",
+
+            "items": {
+                "$ref": "#/definitions/TutorWithPets"
+            }
+        },
+
+        "Pet": {
+            "type": "object",
+            "properties": {
+                "id": { "type": "number", "example": 1 },
+                "name": { "type": "string", "example": "Lillo" },
+                "species": { "type": "string", "example": "dog" },
+                "carry": { "type": "string", "example": "p" },
+                "weight": { "type": "number", "example": 5 },
+                "date_of_birth": {
+                    "type": "string",
+                    "example": "1993-12-12 10:10"
+                }
+            }
+        },
+
+        "successful": {
+            "properties": {
+                "message": {
+                    "type": "string",
+                    "example": "Successful operation"
+                }
+            }
+        },
+        "RegistrationFailed": {
+            "properties": {
+                "error": {
+                    "type": "string",
+                    "example": "Registration Failed"
+                }
+            }
+        },
+        "CleanerAlreadyExists": {
+            "properties": {
+                "error": {
+                    "type": "string",
+                    "example": "Tutor already exists"
+                }
+            }
+        },
+        "InternalServerError": {
+            "properties": {
+                "error": {
+                    "type": "string",
+                    "example": "Internal server error"
+                }
+            }
+        },
+        "CleanerNotFound": {
+            "properties": {
+                "error": {
+                    "type": "string",
+                    "example": "Tutor not found"
+                }
+            }
+        },
+        "InvalidId": {
+            "properties": {
+                "error": {
+                    "type": "string",
+                    "example": "This id is not valid"
+                }
+            }
+        },
+
+        "UserAlreadyExists": {
+            "properties": {
+                "error": {
+                    "type": "string",
+                    "example": "User already exists"
+                }
+            }
+        },
+        "UserNotFound": {
+            "properties": {
+                "error": {
+                    "type": "string",
+                    "example": "User not found"
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Tutor": {
+                "type": "object",
+                "properties": {
+                    "id": { "type": "number" },
+                    "name": { "type": "string" },
+                    "phone": { "type": "string" },
+                    "email": {
+                        "type": "string"
+                    },
+                    "date_of_birth": {
+                        "type": "string"
+                    },
+                    "zip_code": { "type": "string" }
+                }
+            },
+
+            "Pet": {
+                "type": "object",
+                "properties": {
+                    "id": { "type": "number" },
+                    "name": { "type": "string" },
+                    "species": { "type": "string" },
+                    "carry": { "type": "string" },
+                    "weight": { "type": "number" },
+                    "date_of_birth": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}
