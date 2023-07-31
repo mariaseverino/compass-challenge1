@@ -67,8 +67,14 @@ $ npm run dev
 
 # Run the tests
 $ npm run test
+
+# Docs 
+$ http://localhost:3000/api/docs
 ```
 
 ### 🔖 Using the API
 
 Insomnia was used to check the API requests.
+
+
+Maria Rita de Souza Severino maria.severino.pb@compasso.com
