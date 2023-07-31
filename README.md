@@ -1,20 +1,5 @@
 # Challenge #01
 
-<div align="center">
-    <p>
-        <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/mariaseverino/compass-challenge1?color=2596be&logoColor=2596be&style=for-the-badge">
-        <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/mariaseverino/compass-challenge1?color=2596be&logoColor=2596be&style=for-the-badge">
-    </p>
-</div>
-
-<p align="center">
-    <a href="#">Description</a> •
-    <a href="#">Technologies</a> •
-    <a href="#">Architecture</a> •
-    <a href="#">How to run the application</a>
-
-</p>
-
 ## ✨ Description
 
 A client hired Compass to build a new microservice for its veterinary franchise. This microservice will be used by all the clinics they own for internal client and attendances management.
