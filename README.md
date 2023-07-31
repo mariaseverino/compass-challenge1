@@ -52,6 +52,12 @@ that the client has.
 
 Before you begin, you will need to have Node.js installed on your machine.
 
+It was used a Docker Mongo container as the database.
+
+```bash
+$ docker run --name MongoDB --restart unless-stopped -p 27017:27017 -d mongo
+```
+
 ```bash
 # Clone this repository
 $ git clone https://github.com/mariaseverino/compass-challenge1.git
@@ -68,13 +74,12 @@ $ npm run dev
 # Run the tests
 $ npm run test
 
-# Docs 
+# Docs
 $ http://localhost:3000/api/docs
 ```
 
 ### 🔖 Using the API
 
 Insomnia was used to check the API requests.
-
 
 Maria Rita de Souza Severino maria.severino.pb@compasso.com
