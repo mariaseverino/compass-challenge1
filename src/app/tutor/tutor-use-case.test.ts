@@ -1,4 +1,3 @@
-import { randomUUID } from "crypto";
 import { describe, expect, it } from "vitest";
 
 import { Tutor } from "../../entities/tutor/tutor-entity";
@@ -10,7 +9,7 @@ describe("Create tutor", () => {
         const sut = new TutorUseCase(new TutorMongoRepository());
 
         const tutor = new Tutor(
-            Number(randomUUID()),
+            2,
             "Jonas",
             "85989323895",
             "jonas@paidepet.com",
