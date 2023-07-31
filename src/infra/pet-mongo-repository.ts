@@ -4,6 +4,9 @@ import { PetRepository } from "../entities/pet/pet-repository";
 import { Pet } from "../entities/pet/pet-entity";
 
 export class PetMongoRepository implements PetRepository {
+    async updatePet(id: number, pet: Pet): Promise<void> {
+        await PetModel.where({ id }).updateOne(pet);
+    }
     async findPetById(id: number): Promise<Pet | null> {
         const pet = await PetModel.findOne({ id });
 

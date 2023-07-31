@@ -26,4 +26,29 @@ export class PetController {
             });
         }
     }
+
+    async update(request: Request, response: Response) {
+        try {
+            const { petId, tutorId } = request.params;
+
+            const { id, name, species, carry, weight, date_of_birth } =
+                request.body;
+
+            await this.useCase.update(Number(petId), {
+                id,
+                name,
+                species,
+                carry,
+                weight,
+                date_of_birth,
+                tutorId,
+            });
+
+            return response.status(200).send();
+        } catch (err: any) {
+            return response.status(400).json({
+                message: err.message || "Unexpected error",
+            });
+        }
+    }
 }

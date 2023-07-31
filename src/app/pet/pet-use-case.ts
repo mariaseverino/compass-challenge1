@@ -37,4 +37,23 @@ export class PetUseCase {
 
         return response;
     }
+    async update(id: number, request: CreatePetRequest): Promise<void> {
+        const petExists = await this.petRepo.findPetById(id);
+
+        if (petExists == null) {
+            throw new Error("Pet does not exists");
+        }
+
+        const pet = new Pet(
+            request.id,
+            request.name,
+            request.species,
+            request.carry,
+            request.weight,
+            request.date_of_birth,
+            Number(request.tutorId),
+        );
+
+        await this.petRepo.updatePet(id, pet);
+    }
 }
