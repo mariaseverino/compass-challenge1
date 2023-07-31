@@ -13,14 +13,12 @@ export class PetUseCase {
     ) {}
 
     async execute(request: CreatePetRequest): Promise<CreatePetResponse> {
-        console.log(request.tutorId);
         const tutorExists = await this.tutorRepo.findTutorById(
             Number(request.tutorId),
         );
 
-        console.log(tutorExists);
-        if (!tutorExists) {
-            throw new Error("Tutor not exists");
+        if (tutorExists == null) {
+            throw new Error("Tutor does not exists");
         }
 
         const pet = new Pet(

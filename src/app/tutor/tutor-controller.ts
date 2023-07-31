@@ -19,9 +19,14 @@ export class TutorController {
             });
 
             return response.status(201).json(result);
-        } catch (err: any) {
-            return response.status(400).json({
-                message: err.message || "Unexpected error",
+        } catch (err) {
+            if (err instanceof Error) {
+                return response.status(400).json({
+                    message: err.message || "Unexpected error",
+                });
+            }
+            return response.status(500).json({
+                message: "Unexpected error",
             });
         }
     }
@@ -31,9 +36,14 @@ export class TutorController {
             const result = await this.useCase.list();
 
             return response.status(200).json(result);
-        } catch (err: any) {
-            return response.status(400).json({
-                message: err.message || "Unexpected error",
+        } catch (err) {
+            if (err instanceof Error) {
+                return response.status(400).json({
+                    message: err.message || "Unexpected error",
+                });
+            }
+            return response.status(500).json({
+                message: "Unexpected error",
             });
         }
     }
@@ -53,9 +63,14 @@ export class TutorController {
             });
 
             return response.status(200).send();
-        } catch (err: any) {
-            return response.status(400).json({
-                message: err.message || "Unexpected error",
+        } catch (err) {
+            if (err instanceof Error) {
+                return response.status(400).json({
+                    message: err.message || "Unexpected error",
+                });
+            }
+            return response.status(500).json({
+                message: "Unexpected error",
             });
         }
     }
@@ -67,9 +82,14 @@ export class TutorController {
             await this.useCase.delete(Number(id));
 
             return response.status(200).send();
-        } catch (err: any) {
-            return response.status(400).json({
-                message: err.message || "Unexpected error",
+        } catch (err) {
+            if (err instanceof Error) {
+                return response.status(400).json({
+                    message: err.message || "Unexpected error",
+                });
+            }
+            return response.status(500).json({
+                message: "Unexpected error",
             });
         }
     }

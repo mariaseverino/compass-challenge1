@@ -20,9 +20,14 @@ export class PetController {
             });
 
             return response.status(201).json(result);
-        } catch (err: any) {
-            return response.status(400).json({
-                message: err.message || "Unexpected error",
+        } catch (err) {
+            if (err instanceof Error) {
+                return response.status(400).json({
+                    message: err.message || "Unexpected error",
+                });
+            }
+            return response.status(500).json({
+                message: "Unexpected error",
             });
         }
     }
@@ -45,9 +50,14 @@ export class PetController {
             });
 
             return response.status(200).send();
-        } catch (err: any) {
-            return response.status(400).json({
-                message: err.message || "Unexpected error",
+        } catch (err) {
+            if (err instanceof Error) {
+                return response.status(400).json({
+                    message: err.message || "Unexpected error",
+                });
+            }
+            return response.status(500).json({
+                message: "Unexpected error",
             });
         }
     }
@@ -59,9 +69,14 @@ export class PetController {
             await this.useCase.delete(Number(petId));
 
             return response.status(200).send();
-        } catch (err: any) {
-            return response.status(400).json({
-                message: err.message || "Unexpected error",
+        } catch (err) {
+            if (err instanceof Error) {
+                return response.status(400).json({
+                    message: err.message || "Unexpected error",
+                });
+            }
+            return response.status(500).json({
+                message: "Unexpected error",
             });
         }
     }
