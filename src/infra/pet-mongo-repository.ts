@@ -4,6 +4,9 @@ import { PetRepository } from "../entities/pet/pet-repository";
 import { Pet } from "../entities/pet/pet-entity";
 
 export class PetMongoRepository implements PetRepository {
+    async deletePet(id: number): Promise<void> {
+        await PetModel.where({ id }).deleteOne();
+    }
     async updatePet(id: number, pet: Pet): Promise<void> {
         await PetModel.where({ id }).updateOne(pet);
     }

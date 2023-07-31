@@ -56,4 +56,14 @@ export class PetUseCase {
 
         await this.petRepo.updatePet(id, pet);
     }
+
+    async delete(id: number): Promise<void> {
+        const petExists = await this.petRepo.findPetById(id);
+
+        if (petExists == null) {
+            throw new Error("Pet does not exist");
+        }
+
+        await this.petRepo.deletePet(id);
+    }
 }

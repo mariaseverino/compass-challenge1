@@ -51,4 +51,18 @@ export class PetController {
             });
         }
     }
+
+    async delete(request: Request, response: Response) {
+        try {
+            const { petId } = request.params;
+
+            await this.useCase.delete(Number(petId));
+
+            return response.status(200).send();
+        } catch (err: any) {
+            return response.status(400).json({
+                message: err.message || "Unexpected error",
+            });
+        }
+    }
 }
